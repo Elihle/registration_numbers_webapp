@@ -1,0 +1,53 @@
+.container {
+    text-align: center;
+    font-size: 1.5em;
+    
+}
+.header {
+    background-color: #007FFF;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.all-content {
+    margin-left: 25%;
+}
+
+.header h1 {
+    color: #444444;
+    text-shadow: -1px -1px 1px #000, 2px 2px 2px #ccc;
+}
+.header p {
+    background: #CCCCCC;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.header img {
+    border-radius: 5em;
+}
+.form-control{
+    margin-bottom: 2em;
+}
+
+button {
+    padding: 10em;
+}
+
+hr.style-eight {
+    overflow: visible; /* For IE */
+    padding: 0;
+    border: none;
+    border-top: medium double #333;
+    color: #333;
+    text-align: center;
+    margin-top: 5em;
+}
+hr.style-eight:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    background: white;
+}
