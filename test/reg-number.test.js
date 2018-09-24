@@ -3,6 +3,20 @@ const Registrations = require('../services/reg-numbers');
 const pg = require("pg");
 const Pool = pg.Pool;
 
+// should we use a SSL connection
+let useSSL = false;
+let local = process.env.LOCAL || false;
+if (process.env.DATABASE_URL && !local) {
+    useSSL = true;
+}
+const app = express();
+
+app.use(session({
+    secret: 'registration numbers exercise',
+    resave: false,
+    saveUninitialized: true
+}));
+
 // which db connection to use
 const connectionString = process.env.DATABASE_URL || 'postgresql://coder:coder@localhost:5432/reg_numbers';
 const pool = new Pool({
