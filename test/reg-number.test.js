@@ -3,11 +3,12 @@ const Registrations = require('../services/reg-numbers');
 const pg = require("pg");
 const Pool = pg.Pool;
 
+// which db connection to use
 const connectionString = process.env.DATABASE_URL || 'postgresql://coder:coder@localhost:5432/reg_numbers';
 const pool = new Pool({
-    connectionString
+    connectionString,
+    ssl: useSSL
 });
-
 describe('Registration Numbers', function () {
 
     beforeEach(async function () {
