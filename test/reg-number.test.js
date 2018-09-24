@@ -1,4 +1,5 @@
 const assert = require('assert');
+const express = require('express');
 const Registrations = require('../services/reg-numbers');
 const pg = require("pg");
 const Pool = pg.Pool;
