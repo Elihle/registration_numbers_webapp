@@ -24,7 +24,7 @@ module.exports = function Registrations(pool) {
                 regTag.startsWith('CK ') || regTag.startsWith('CAW '))) {
                     await updateReg(regNum, regId);
         }
-        await insertReg(reg,regId);
+        await insertReg(regTag,regId);
 
     }
 

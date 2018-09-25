@@ -3,11 +3,15 @@ const exphbs = require('express-handlebars');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const pg = require("pg");
-const Registrations = require('./services/reg-numbers');
+const Services = require('./services/reg-numbers');
+const Routes = require('./routes/routes');
+
 const Pool = pg.Pool;
 
 let app = express();
-let regNumbers = Registrations();
+// let regNumbers = Registrations();
+let services = Services(Pool);
+let routes = Routes(services);
 
 // should we use a SSL connection
 let useSSL = false;
@@ -42,9 +46,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-    res.render('home');
-});
+app.get('/', routes.homeRoute);
+app.post('/registations', routes.addReg);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {

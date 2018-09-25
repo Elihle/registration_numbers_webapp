@@ -52,12 +52,15 @@ describe('Registration Numbers', function () {
         assert.strictEqual(results.length, 2);
     });
 
-    // it('should filter from table', async function () {
-    //     let reg = Registrations(pool);
-    //     await reg.tryAddPlate('CA-9502', 1);
-    //     let results = filterByTown('CA');
-    //     assert.equal(results.length, 1);
-    // });
+    it('should filter from table', async function () {
+        let reg = Registrations(pool);
+        await reg.insertReg('CA-9502', 1);
+        await reg.updateReg('CA');
+        let results = await reg.myData();
+        assert.strictEqual(results.length, 1);
+
+    });
+        
 
 
     after(function () {
