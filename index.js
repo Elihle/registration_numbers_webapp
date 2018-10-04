@@ -49,7 +49,14 @@ app.use(express.static('public'));
 app.get('/', routes.homeRoute);
 app.post('/registations', routes.addReg);
 
+
+app.post('/registrations', function (req, res) {
+    let reg = req.body.reg;
+    let greetName = routes.allGreetings(input, greeted);
+});
+
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
     console.log('App starting on port', PORT);
 });
+

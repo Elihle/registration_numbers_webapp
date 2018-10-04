@@ -17,16 +17,11 @@ module.exports = function Registrations(pool) {
         await pool.query('UPDATE registrations SET reg_number = $1 where reg_Id = $2', [regNum, regId]);
     }
 
-    async function tryAddPlate(regNum, regId) {
-        let regTag = await selectReg(regNum);
-        if (regTag === undefined &&
-            (regTag.startsWith('CA ') || regTag.startsWith('CL ') ||
-                regTag.startsWith('CK ') || regTag.startsWith('CAW '))) {
-                    await updateReg(regNum, regId);
-        }
-        await insertReg(regTag,regId);
+    // async function tryAddPlate(regNum, regId) {
+    //     let regTag = await selectReg(regNum);
+  
 
-    }
+    // }
 
     async function filterByTown(regNum) {
         let filter = await pool.query("SELECT * from towns where town_name LIKE $1" % regNum % "");
@@ -39,7 +34,7 @@ module.exports = function Registrations(pool) {
         insertReg,
         selectReg,
         updateReg,
-        tryAddPlate,
+        // tryAddPlate,
         filterByTown
     }
 

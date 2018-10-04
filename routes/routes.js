@@ -1,5 +1,5 @@
 module.exports = function (services) {
-    function homeRoute(req, res) {
+   async function homeRoute(req, res) {
         try {
             res.render('home', {});
         } catch (err) {
@@ -7,10 +7,10 @@ module.exports = function (services) {
         }
     }
 
-    function addReg(req, res) {
+   async function addReg(req, res) {
         try {
-            let reg = req.body.reg;
-            let output = insertReg(reg);
+            let reg = await req.params.reg;
+            let output = selectReg(reg);
             res.render('home', output);
         } catch (err) {
             res.send(err.stack)
