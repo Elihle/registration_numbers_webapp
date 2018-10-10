@@ -9,9 +9,7 @@ const Routes = require('./routes/routes');
 const Pool = pg.Pool;
 
 let app = express();
-// let regNumbers = Registrations();
-let services = Services(Pool);
-let routes = Routes(services);
+
 
 // should we use a SSL connection
 let useSSL = false;
@@ -26,7 +24,9 @@ const pool = new Pool({
     connectionString,
     ssl: useSSL
 });
-
+// let regNumbers = Registrations();
+let services = Services(pool);
+let routes = Routes(services);
 app.use(session({
     secret: 'registration numbers',
     resave: false,
@@ -47,16 +47,10 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', routes.homeRoute);
-app.post('/registations', routes.addReg);
-
-
-app.post('/registrations', function (req, res) {
-    let reg = req.body.reg;
-    let greetName = routes.allGreetings(input, greeted);
-});
+app.post('/registrations', routes.addReg);
+app.post('/filter:towns', routes.filterByTown);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
     console.log('App starting on port', PORT);
 });
-

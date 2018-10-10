@@ -1,50 +1,52 @@
 <form action="/registrations" method="POST">
 
 
-<div class="col-md-12">
-    <div class="header">
-        <img src="images/cars_50_1_50.jpeg">
-        <h1>REG-NUMBERS</h1>
-        <p><i>Western Cape registration numbers</i></p>
+    <div class="col-md-12">
+        <div class="header">
+            <img src="images/cars_50_1_50.jpeg">
+            <h1>REG-NUMBERS</h1>
+            <p><i>Western Cape registration numbers</i></p>
+        </div>
     </div>
-</div>
 
-<div class="all-content">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="pwd">Registration number:</label>
-                <input type="reg-number" class="form-control" value="{{reg}}" id="pwd" placeholder="enter reg number here">
+    <div class="all-content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="pwd">Registration number:</label>
+                    <input type="reg-number" name="enterReg" class="form-control" value="{{enterReg}}" id="pwd"
+                        placeholder="enter reg number here">
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <select class="form-control">
-                <option value="select All">Select All</option>
-                <option value="CA">Cape Town</option>
-                <option value="CL">Paarl</option>
-                <option value="CAW">George</option>
-                <option value="CK">Stellenbosch</option>
-            </select>
-
+<form action="/filter:towns" method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <select class="form-control">
+                    <option name="towns" value="all">Select All</option>
+                    <option name="towns" value="CA">Cape Town</option>
+                    <option name="towns" value="CL">Paarl</option>
+                    <option name="towns" value="CK">Stellenbosch</option>
+                    <option name="towns" value="CAW">Goerge</option>
+                </select>
+            </div>
         </div>
-    </div>
+        </form>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-success">Add</button>
+            <button type="button" class="btn btn-danger">Reset</button>
+        </div>
 
-    <div class="col-md-6">
-        <button type="button" class="btn btn-success">Add</button>
-        <button type="button" class="btn btn-danger">Reset</button>
-    </div>
-
-    <div class="output">
-
-    </div>
+        {{#each town}}
+        <div class="row">
+            <div class="output">
+                <button class="btn btn-warning">{{reg_number}}</button>
+                
+            </div>
+        </div>
+        {{/each}}
 </form>
-
-
-
-
 </div>
 
 <div>

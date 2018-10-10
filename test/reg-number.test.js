@@ -60,8 +60,6 @@ describe('Registration Numbers', function () {
         assert.strictEqual(results.length, 1);
 
     });
-        
-
 
     after(function () {
         pool.end();

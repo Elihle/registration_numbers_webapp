@@ -17,3 +17,4 @@ insert into towns (town_name, town_tag) VALUES ('Paarl', 'CL');
 insert into towns (town_name, town_tag) VALUES ('Stellenbosch', 'CK');
 insert into towns (town_name, town_tag) VALUES ('Goerge', 'CAW');
 insert into towns (town_name, town_tag) VALUES ('All', 'All');
+
