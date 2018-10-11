@@ -36,20 +36,22 @@ module.exports = function Registrations(pool) {
         if (tagList === 'All') {
             let selectedTown = await pool.query("SELECT reg_number FROM registrations");
             return selectedTown.rows;
-        } else {
-            let regTag = tagList.substr(0, 3).trim();
-            console.log(regTag);
-            let result = await pool.query('SELECT id FROM towns WHERE town_tag=$1', [regTag]);
-            let regNo = await pool.query('SELECT reg_number FROM registratons WHERE reg_id=$1', [result.rows[0].id]);
+        } else {            
+            let result = await pool.query('SELECT id FROM towns WHERE town_tag=$1', [tagList]);
+             console.log(result.rowCount)
+            
+             let regNo = await pool.query('SELECT reg_number FROM registrations WHERE reg_id=$1', [result.rows[0].id]);
+            console.log(regNo.rows);
+            
             return regNo.rows;
         }
     }
 
-    // async function filterByTown(regNum) {
+ 
+   // async function filterByTown(regNum) {
     //     let filter = await pool.query("SELECT * from towns where town_name LIKE $1" ,['%' + regNum +' %']);
     //     return filter.rows;
     // }
-
   return { 
         checkReg,
         insertReg,

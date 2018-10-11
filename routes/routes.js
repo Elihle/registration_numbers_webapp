@@ -1,20 +1,22 @@
 module.exports = function (services) {
-   async function homeRoute(req, res) {
+    async function homeRoute(req, res) {
         try {
+            let towns = await services.getTowns();
             let town = await services.checkReg();
-            console.log(town);
-            
-             res.render('home', {town});
+
+            res.render('home', {
+                town,
+                towns
+            });
         } catch (err) {
             res.send(err.stack)
         }
     }
 
-   async function addReg(req, res) {
+    async function addReg(req, res) {
         try {
             let enterReg = await req.body.enterReg;
-            //  console.log('insert reg', enterReg);
-             await services.insertReg(enterReg);
+            await services.insertReg(enterReg);
 
             res.redirect('/');
         } catch (err) {
@@ -25,10 +27,12 @@ module.exports = function (services) {
     async function getAllTowns(req, res) {
         try {
             let selectTown = req.params.towns;
+            console.log(selectTown);
             let filterTowns = await services.filterByTown(selectTown);
 
-            console.log('towns',filterTowns);
-            res.render('home', filterTowns)
+            res.render('home', {
+                town: filterTowns
+            })
         } catch (err) {
             res.send(err.stack)
         }

@@ -3,7 +3,7 @@
         <div class="header">
             <img src="images/cars_50_1_50.jpeg">
             <h1>REG-NUMBERS</h1>
-            <p><i>Western Cape registration numbers</i></p>
+            <p>Western Cape registration numbers</p>
         </div>
     </div>
 
@@ -18,21 +18,17 @@
             </div>
         </div>
 
-        <form action="/filter:towns" method="POST">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-6">
-                        <select class="form-control">
-                            <option name="towns" value="all">Select All</option>
-                            <option name="towns" value="CA">Cape Town</option>
-                            <option name="towns" value="CL">Paarl</option>
-                            <option name="towns" value="CK">Stellenbosch</option>
-                            <option name="towns" value="CAW">Goerge</option>
-                        </select>
-                    </div>
-                </div>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Select Town
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {{#each towns}}
+                <a class="dropdown-item" href="/filter/{{town_tag}}">{{town_name}}</a>
+                {{/each}}
             </div>
-        </form>
+        </div>
 
         <div class="col-md-6">
             <button type="submit" class="btn btn-success">Add</button>

@@ -47,10 +47,9 @@ app.use(express.static('public'));
 
 app.get('/', routes.homeRoute);
 app.post('/registrations', routes.addReg);
-app.post('/filter:towns', routes.getAllTowns);
+app.get('/filter/:towns', routes.getAllTowns);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {
-    
     console.log('App starting on port', PORT);
 });
