@@ -27,10 +27,12 @@ module.exports = function (services) {
     async function getAllTowns(req, res) {
         try {
             let selectTown = req.params.towns;
+            let towns = await services.getTowns();
             console.log(selectTown);
             let filterTowns = await services.filterByTown(selectTown);
 
             res.render('home', {
+                towns,
                 town: filterTowns
             })
         } catch (err) {
