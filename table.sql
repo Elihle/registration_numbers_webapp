@@ -1,4 +1,4 @@
-drop table towns, registrations;
+drop table if exists towns, registrations;
 create table towns (
     id serial not null primary key,
     town_name text not null,

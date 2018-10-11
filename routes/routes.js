@@ -13,7 +13,7 @@ module.exports = function (services) {
    async function addReg(req, res) {
         try {
             let enterReg = await req.body.enterReg;
-             console.log(enterReg);
+            //  console.log('insert reg', enterReg);
              await services.insertReg(enterReg);
 
             res.redirect('/');
@@ -22,42 +22,21 @@ module.exports = function (services) {
         }
     }
 
-    // async function getAllTowns(req, res) {
-    //     try {
-    //         let filterTowns = await regNums.getAllTowns(towns); 
-    //     } catch (err) {
-    //         res.send(err.stack)
-    //     }
-    // }
+    async function getAllTowns(req, res) {
+        try {
+            let selectTown = req.params.towns;
+            let filterTowns = await services.filterByTown(selectTown);
+
+            console.log('towns',filterTowns);
+            res.render('home', filterTowns)
+        } catch (err) {
+            res.send(err.stack)
+        }
+    }
 
     return {
         homeRoute,
-        addReg
+        addReg,
+        getAllTowns
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  I wish I was able to communicate the thoughts I hold
-//  Sometimes I wish I was different
-//  I wish I could die
-//  I am useless
-//  I hate myself sometimes
-//  I always wonder why God created me in the first place
-//  Do you ever wonder what your purpose in life is?
-//  Do you ever feel useless sometimes?
-//  Do you ever want to cry but no tears are coming out?
-//  

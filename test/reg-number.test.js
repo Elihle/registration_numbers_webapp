@@ -23,14 +23,14 @@ describe('Registration Numbers', function () {
 
     it('should return 0', async function () {
         let reg = Registrations(pool);
-        let results = await reg.myData();
+        let results = await reg.checkReg();
         assert.equal(results.length, 0);
     });
 
     it('should insert from table', async function () {
         let reg = Registrations(pool);
         await reg.insertReg('CA', 1);
-        let results = await reg.myData();
+        let results = await reg.checkReg();
         assert.strictEqual(results.length, 1);
     });
 
@@ -38,17 +38,16 @@ describe('Registration Numbers', function () {
         let reg = Registrations(pool);
         await reg.insertReg('CA-123', 1);
         await reg.selectReg('CA-123');
-        let results = await reg.myData();
+        let results = await reg.checkReg();
         assert.strictEqual(results.length, 1);
     });
 
     it('should update from table', async function () {
         let reg = Registrations(pool);
-        await reg.insertReg('CA-123', 1);
-        await reg.insertReg('CA-123', 1);
-        await reg.updateReg('CA-123', 2);
+        await reg.insertReg('CA-123');
+        await reg.updateReg('CA-123', 1);
 
-        let results = await reg.myData();
+        let results = await reg.checkReg();
         assert.strictEqual(results.length, 2);
     });
 
@@ -56,7 +55,7 @@ describe('Registration Numbers', function () {
         let reg = Registrations(pool);
         await reg.insertReg('CA-9502', 1);
         await reg.updateReg('CA');
-        let results = await reg.myData();
+        let results = await reg.checkReg();
         assert.strictEqual(results.length, 1);
 
     });
