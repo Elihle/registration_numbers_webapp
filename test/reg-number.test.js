@@ -51,7 +51,7 @@ describe('Registration Numbers', function () {
         assert.strictEqual(results.length, 1);
     });
 
-    it('should return if false registration number is invalid', async function () {
+    it('should return false if registration number is invalid', async function () {
         let reg = Registrations(pool);
         await reg.insertReg('CAK 123', false);
         let results = await reg.checkReg();
