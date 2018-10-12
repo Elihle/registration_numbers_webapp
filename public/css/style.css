@@ -69,3 +69,10 @@ span.a {
     font-weight: bold;
     border: 1px solid black;
 }
+
+span {
+    width: 10em;
+}
+a {
+    color: white;
+}

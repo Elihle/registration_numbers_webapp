@@ -6,10 +6,7 @@ const bodyParser = require('body-parser');
 const pg = require("pg");
 const Services = require('./services/reg-numbers');
 const Routes = require('./routes/routes');
-
 const Pool = pg.Pool;
-
-let app = express();
 
 // should we use a SSL connection
 let useSSL = false;
@@ -24,9 +21,11 @@ const pool = new Pool({
     connectionString,
     ssl: useSSL
 });
-// let regNumbers = Registrations();
+
+let app = express();
 let services = Services(pool);
 let routes = Routes(services);
+
 app.use(session({
     secret: 'registration numbers',
     resave: false,
@@ -51,6 +50,7 @@ app.use(express.static('public'));
 app.get('/', routes.homeRoute);
 app.post('/registrations', routes.addReg);
 app.get('/filter/:towns', routes.getAllTowns);
+app.get('/reset', routes.clearDb);
 
 let PORT = process.env.PORT || 3007;
 app.listen(PORT, function () {

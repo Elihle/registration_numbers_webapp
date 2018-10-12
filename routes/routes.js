@@ -15,22 +15,22 @@ module.exports = function (services) {
 
     async function addReg(req, res) {
         try {
-            let enterReg = await req.body.enterReg;
-           
-            let regNum = await services.insertReg(enterReg);
+            let enterReg = req.body.enterReg;
+            if (enterReg == '' || enterReg == undefined) {
+                req.flash('info', 'Please enter registration number');
+            } else {
+                let regNum = await services.insertReg(enterReg);
+                if (regNum === 'invalid') {
+                    req.flash('info', 'Invalid registration number entered');
+                }
+                if (regNum === 'exists') {
+                    req.flash('info', 'Registration number already exists');
+                }
+            }
 
-            // if (regNum === '') {
-            //     req.flash('info', 'Please enter registaration number');
-            // }
-            // if (regNum == 0) {
-            //     req.flash('info', 'Please enter correct registration number');
-            // }
+            res.redirect("/");
 
-            // if (regNum == undefined) {
-            //     req.flash("infoTwo", "Registration number already exits")
-            // }
 
-            res.redirect('/');
         } catch (err) {
             res.send(err.stack)
         }
@@ -51,9 +51,24 @@ module.exports = function (services) {
         }
     }
 
+    async function clearDb(req, res) {
+        try {
+            let reset = await services.resetDb();
+            let towns = await services.getTowns();
+
+            res.render('home', {
+                reset,
+                towns
+            });
+        } catch (err) {
+            res.send(err.stack);
+        }
+    }
+
     return {
         homeRoute,
         addReg,
-        getAllTowns
+        getAllTowns,
+        clearDb
     }
 }

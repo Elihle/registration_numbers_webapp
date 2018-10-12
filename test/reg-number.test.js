@@ -42,15 +42,39 @@ describe('Registration Numbers', function () {
         assert.strictEqual(results.length, 1);
     });
 
-    // it('should filter from table', async function () {
-    //     let reg = Registrations(pool);
-    //     await reg.insertReg('CAW 599', 1);
-    //     await reg.insertReg('CK 237', 1);
-    //     await reg.filterByTown('CAW');
-    //     let results = await reg.checkReg();
-    //     assert.strictEqual(results.length, 1);
+    it('should not add duplicates', async function () {
+        let reg = Registrations(pool);
+        await reg.insertReg('CA 123', 1);
+        await reg.insertReg('CA 123', 1);
+        await reg.selectReg('CA 123');
+        let results = await reg.checkReg();
+        assert.strictEqual(results.length, 1);
+    });
 
-    // });
+    it('should return if false registration number is invalid', async function () {
+        let reg = Registrations(pool);
+        await reg.insertReg('CAK 123', false);
+        let results = await reg.checkReg();
+        assert.strictEqual(results.length, 0);
+    });
+
+    it('should return true if registration number is valid', async function () {
+        let reg = Registrations(pool);
+        await reg.insertReg('CA 123', true);
+        let results = await reg.checkReg();
+        assert.strictEqual(results.length, 1);
+    });
+
+    it('should filter from table', async function () {
+        let reg = Registrations(pool);
+        await reg.insertReg('CAW 237', 1);
+        await reg.insertReg('CAW 103', 1);
+
+        await reg.filterByTown('CAW');
+        let results = await reg.checkReg();
+        assert.strictEqual(results.length, 2);
+
+    });
 
     after(function () {
         pool.end();

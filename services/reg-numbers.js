@@ -17,25 +17,28 @@ module.exports = function Registrations(pool) {
         }
         return checkTags.rows[0].id;
     }
-   
-    async function isDuplicate (reg){
-      let found = await pool.query('SELECT registrations where id = town_tag', [reg]);
-      if (found.rowCount>0) {
-          return true;
-      }
-      else false;
-    } 
-    
-    async function insertReg(reg) {
-        
-        if(await isDuplicate(reg)){
-         return 'duplicate'
-        }
 
-        let regId = await find_reg_id(reg);
-        await pool.query('INSERT INTO registrations (reg_number, reg_id) values ($1, $2)', [reg, regId]);
+    async function isDuplicate(reg) {
+        let found = await pool.query('SELECT * FROM registrations WHERE reg_number=$1', [reg]);
+        if (found.rowCount > 0) {
+            return true;
+        } else {
+            return false
+        }
     }
 
+    async function insertReg(reg) {
+        let duplicateReg = await isDuplicate(reg);
+        if (duplicateReg === true) {
+            return 'exists';
+        } else {
+            let regId = await find_reg_id(reg);
+            if (regId === 0) {
+                return 'invalid';
+            }
+            await pool.query('INSERT INTO registrations (reg_number, reg_id) values ($1, $2)', [reg, regId]);
+        }
+    }
     async function selectReg(regNum) {
         let results = await pool.query('SELECT * FROM towns WHERE town_tag = $1', [regNum]);
         return results.rows;
@@ -47,7 +50,7 @@ module.exports = function Registrations(pool) {
 
     async function filterByTown(tagList) {
         if (tagList === 'All') {
-            let selectedTown = await pool.query("SELECT reg_number FROM registrations");
+            let selectedTown = await pool.query('SELECT reg_number FROM registrations');
             return selectedTown.rows;
         } else {
             let result = await pool.query('SELECT id FROM towns WHERE town_tag=$1', [tagList]);
@@ -59,18 +62,19 @@ module.exports = function Registrations(pool) {
         }
     }
 
+    async function resetDb() {
+        let results = pool.query('delete from registrations');
+        return results;
+    }
 
-    // async function filterByTown(regNum) {
-    //     let filter = await pool.query("SELECT * from towns where town_name LIKE $1" ,['%' + regNum +' %']);
-    //     return filter.rows;
-    // }
     return {
         checkReg,
         insertReg,
         selectReg,
         updateReg,
         filterByTown,
-        getTowns
+        getTowns,
+        resetDb
 
     }
 }
