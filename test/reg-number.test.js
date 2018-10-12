@@ -36,29 +36,21 @@ describe('Registration Numbers', function () {
 
     it('should select from table', async function () {
         let reg = Registrations(pool);
-        await reg.insertReg('CA-123', 1);
-        await reg.selectReg('CA-123');
+        await reg.insertReg('CA 123', 1);
+        await reg.selectReg('CA 123');
         let results = await reg.checkReg();
         assert.strictEqual(results.length, 1);
     });
 
-    it('should update from table', async function () {
-        let reg = Registrations(pool);
-        await reg.insertReg('CA-123');
-        await reg.updateReg('CA-123', 1);
+    // it('should filter from table', async function () {
+    //     let reg = Registrations(pool);
+    //     await reg.insertReg('CAW 599', 1);
+    //     await reg.insertReg('CK 237', 1);
+    //     await reg.filterByTown('CAW');
+    //     let results = await reg.checkReg();
+    //     assert.strictEqual(results.length, 1);
 
-        let results = await reg.checkReg();
-        assert.strictEqual(results.length, 2);
-    });
-
-    it('should filter from table', async function () {
-        let reg = Registrations(pool);
-        await reg.insertReg('CA-9502', 1);
-        await reg.updateReg('CA');
-        let results = await reg.checkReg();
-        assert.strictEqual(results.length, 1);
-
-    });
+    // });
 
     after(function () {
         pool.end();

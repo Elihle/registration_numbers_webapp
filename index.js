@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
+const flash = require("express-flash");
 const bodyParser = require('body-parser');
 const pg = require("pg");
 const Services = require('./services/reg-numbers');
@@ -31,6 +32,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
+app.use(flash());
 
 // handlebars
 app.engine('handlebars', exphbs({

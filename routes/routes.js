@@ -16,7 +16,18 @@ module.exports = function (services) {
     async function addReg(req, res) {
         try {
             let enterReg = await req.body.enterReg;
-            await services.insertReg(enterReg);
+            let regNum = await services.insertReg(enterReg);
+
+            if (regNum === '') {
+                req.flash('info', 'Please enter registaration number');
+            }
+            if (regNum == false) {
+                req.flash('info', 'Please enter correct registration number');
+            }
+
+            if (regNum == undefined) {
+                req.flash("infoTwo", "Registration number already exits")
+            }
 
             res.redirect('/');
         } catch (err) {
@@ -28,13 +39,12 @@ module.exports = function (services) {
         try {
             let selectTown = req.params.towns;
             let towns = await services.getTowns();
-            console.log(selectTown);
             let filterTowns = await services.filterByTown(selectTown);
 
             res.render('home', {
                 towns,
                 town: filterTowns
-            })
+            });
         } catch (err) {
             res.send(err.stack)
         }

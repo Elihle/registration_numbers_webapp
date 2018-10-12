@@ -12,9 +12,10 @@ create table registrations (
     foreign key (reg_id) references towns (id)
 );
 
+insert into towns (town_name, town_tag) VALUES ('Select All', 'All');
 insert into towns (town_name, town_tag) VALUES ('Cape Town', 'CA');
 insert into towns (town_name, town_tag) VALUES ('Paarl', 'CL');
 insert into towns (town_name, town_tag) VALUES ('Stellenbosch', 'CK');
 insert into towns (town_name, town_tag) VALUES ('Goerge', 'CAW');
-insert into towns (town_name, town_tag) VALUES ('All', 'All');
+
 
