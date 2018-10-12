@@ -16,18 +16,19 @@ module.exports = function (services) {
     async function addReg(req, res) {
         try {
             let enterReg = await req.body.enterReg;
+           
             let regNum = await services.insertReg(enterReg);
 
-            if (regNum === '') {
-                req.flash('info', 'Please enter registaration number');
-            }
-            if (regNum == false) {
-                req.flash('info', 'Please enter correct registration number');
-            }
+            // if (regNum === '') {
+            //     req.flash('info', 'Please enter registaration number');
+            // }
+            // if (regNum == 0) {
+            //     req.flash('info', 'Please enter correct registration number');
+            // }
 
-            if (regNum == undefined) {
-                req.flash("infoTwo", "Registration number already exits")
-            }
+            // if (regNum == undefined) {
+            //     req.flash("infoTwo", "Registration number already exits")
+            // }
 
             res.redirect('/');
         } catch (err) {

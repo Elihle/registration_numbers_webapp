@@ -17,8 +17,21 @@ module.exports = function Registrations(pool) {
         }
         return checkTags.rows[0].id;
     }
-
+   
+    async function isDuplicate (reg){
+      let found = await pool.query('SELECT registrations where id = town_tag', [reg]);
+      if (found.rowCount>0) {
+          return true;
+      }
+      else false;
+    } 
+    
     async function insertReg(reg) {
+        
+        if(await isDuplicate(reg)){
+         return 'duplicate'
+        }
+
         let regId = await find_reg_id(reg);
         await pool.query('INSERT INTO registrations (reg_number, reg_id) values ($1, $2)', [reg, regId]);
     }
