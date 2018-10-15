@@ -1,7 +1,7 @@
 <form action="/registrations" method="POST">
     <div class="col-md-12">
         <div class="header">
-            <img src="images/cars_50_1_50.jpeg">
+            <img src="css/cars_50_1_50.jpeg">
             <h1>REG-NUMBERS</h1>
             <p>Western Cape registration numbers</p>
         </div>
@@ -9,49 +9,60 @@
 
     <div class="all-content">
         <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="pwd">Registration number:</label>
-                    <input type="reg-number" name="enterReg" class="form-control" value="{{enterReg}}" id="pwd"
-                        placeholder="enter reg number here">
+            <div class="col-md-12">
+                <div class="form-inline">
+                    <label for="pwd"><b>Registration number:</b></label>
+                    <input type="reg-number" name="enterReg" class="form-control" value="{{enterReg}}" placeholder="enter reg number here" pattern="[A-Z]{2,3}\s\d{3}\s\d{3}||[A-Z]{2,3}\s\d{3}" title="example: CA 123 347">
+                    <button type="submit" class="btn btn-success">Add</button>
+                    <a class="btn btn-danger" role="button" href="/reset">Reset</a>
                 </div>
             </div>
         </div>
 
-        <span class="entry">
-            <h5>{{messages.info}}</h5>
-        </span>
-        <span class="entry">
-            <h5>{{messages.infoTwo}}</h5>
-        </span>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                Select Town
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {{#each towns}}
-                <a class="dropdown-item" href="/filter/{{town_tag}}">{{town_name}}</a>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="entry">
+                    <h5>{{messages.info}}</h5>
+                </span>
+                <span class="entry">
+                    <h5>{{messages.infoTwo}}</h5>
+                </span>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-10">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Select Town
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        {{#each towns}}
+                        <a class="dropdown-item" href="/filter/{{town_tag}}">{{town_name}}</a>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {{#each town}}
+                <div class="row">
+                    <div class="output">
+                        <span class="btn btn-warning a">{{reg_number}}</span>
+                    </div>
+                </div>
                 {{/each}}
             </div>
         </div>
 
-        <div class="col-md-6">
-            <button type="submit" class="btn btn-success">Add</button>
-            <a class="btn btn-danger" role="button"href="/reset">Reset</a>
-        </div>
-
-        {{#each town}}
-        <div class="row">
-            <div class="output">
-                <span class="btn btn-warning a">{{reg_number}}</span>
-            </div>
-        </div>
-        {{/each}}
 </form>
 </div>
 
 <div>
-    <hr class="style-eight">
+    <hr class="footer">
 </div>
 </div>
