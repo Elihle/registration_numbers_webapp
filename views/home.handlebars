@@ -12,7 +12,7 @@
             <div class="col-md-12">
                 <div class="form-inline">
                     <label for="pwd"><b>Registration number:</b></label>
-                    <input type="reg-number" name="enterReg" class="form-control" value="{{enterReg}}" placeholder="enter reg number here" pattern="[A-Z]{2,3}\s\d{3}\s\d{3}||[A-Z]{2,3}\s\d{3}" title="example: CA 123 347">
+                    <input type="reg-number" name="enterReg" class="form-control" value="{{enterReg}}" placeholder="enter reg number here" pattern="[A-Z]{2,3}\s\d{3}[-]\d{3}||[A-Z]{2,3}[-]\d{3}" title="example: CA 123-347">
                     <button type="submit" class="btn btn-success">Add</button>
                     <a class="btn btn-danger" role="button" href="/reset">Reset</a>
                 </div>
