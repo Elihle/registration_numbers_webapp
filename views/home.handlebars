@@ -21,7 +21,6 @@
                     <input type="reg-number" name="enterReg" class="form-control" value="{{enterReg}}" placeholder="enter reg number here"
                         pattern="[A-Z]{2,3}\s\d{3}[-]\d{3}||[A-Z]{2,3}[-]\d{3}" title="example: CA 123-347">
                     <button type="submit" class="btn btn-success">Add</button>
-                    <a class="btn btn-danger" role="button" href="/reset">Reset</a>
                 </div>
             </div>
         </div>
@@ -38,6 +37,7 @@
                         <a class="dropdown-item" href="/filter/{{town_tag}}">{{town_name}}</a>
                         {{/each}}
                     </div>
+                    <a class="btn btn-danger" role="button" href="/reset">Reset</a>
                 </div>
             </div>
         </div>

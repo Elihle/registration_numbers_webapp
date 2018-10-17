@@ -32,9 +32,9 @@
     border-radius: 5em;
 }
 
-/* .form-control {
-    margin-bottom: 2em;
-} */
+.dropdown {
+    margin-top: 2em;
+}
 
 button {
     padding: 10em;
@@ -61,11 +61,11 @@ hr.style-eight:after {
     background: white;
 }
 
-.entry {
+.entry h5{
     color: red;
-    font-size: 2em;
+    font-size: 0.8em;
     text-align: center;
-
+    margin-right: 12em;
 }
 
 span.a {

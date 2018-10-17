@@ -21,7 +21,7 @@ module.exports = function (services) {
             } else {
                 let regNum = await services.insertReg(enterReg);
                 if (regNum === 'invalid') {
-                    req.flash('info', 'Invalid registration number entered');
+                    req.flash('info', 'Please enter registration numbers from the following towns:Cape Town, George, Stellenbosch or Paarl ');
                 }
                 if (regNum === 'exists') {
                     req.flash('info', 'Registration number already exists');
